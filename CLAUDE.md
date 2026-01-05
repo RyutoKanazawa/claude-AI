@@ -8,9 +8,9 @@ GitHub Pagesにデプロイするための、LocalStorageを使用したフル�
 
 ## GitHubリポジトリ
 
-- **リモート**: https://github.com/RyutoKanazawa/claude-AI
+- **リモート**: https://github.com/RyutoKanazawa/TODO
 - **公開設定**: パブリック
-- **GitHub Pages**: https://ryutokanazawa.github.io/claude-AI/
+- **GitHub Pages**: https://ryutokanazawa.github.io/TODO/
 
 ## プロジェクト構造
 
@@ -128,7 +128,7 @@ npm run deploy   # gh-pagesブランチにデプロイ
 ```
 
 ### デプロイに関する注意事項
-- ベースパスは`/claude-AI/`（vite.config.tsで設定）
+- ベースパスは`/TODO/`（vite.config.tsで設定）
 - バックエンドAPIの代わりにLocalStorageを使用
 - バックエンドはGitHub Pagesにデプロイされない
 - 無料のGitHub Pagesを使用するにはリポジトリをパブリックにする必要がある

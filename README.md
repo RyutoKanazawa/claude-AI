@@ -1,158 +1,183 @@
-# TODO Application
+# TODOアプリケーション
 
-A full-stack TODO application with advanced features including categories, tags, due dates, and priority levels.
+カテゴリ、タグ、期限、優先度などの高度な機能を備えたフルスタックTODOアプリケーションです。
 
-## Features
+## 機能
 
-- ✅ Create, read, update, and delete tasks
-- ✅ Mark tasks as complete/incomplete
-- ✅ Organize tasks with categories
-- ✅ Add multiple tags to tasks
-- ✅ Set due dates with overdue indicators
-- ✅ Assign priority levels (High, Medium, Low)
-- ✅ Filter tasks by status, priority, category, and tags
-- ✅ Sort tasks by creation date, due date, or priority
-- ✅ Responsive design for mobile and desktop
-- ✅ Real-time updates
+- ✅ タスクの作成、閲覧、更新、削除
+- ✅ タスクの完了/未完了の切り替え
+- ✅ カテゴリでタスクを整理
+- ✅ タスクに複数のタグを追加
+- ✅ 期限日の設定と期限切れインジケーター
+- ✅ 優先度レベルの設定（高、中、低）
+- ✅ ステータス、優先度、カテゴリ、タグでタスクをフィルタリング
+- ✅ 作成日、期限日、優先度でタスクをソート
+- ✅ モバイル・デスクトップ対応のレスポンシブデザイン
+- ✅ リアルタイム更新
 
-## Technology Stack
+## デモ
 
-### Backend
+**GitHub Pages**: https://ryutokanazawa.github.io/TODO/
+
+※ GitHub Pagesではフロントエンドのみ（LocalStorage使用）
+
+## 技術スタック
+
+### バックエンド（ローカル開発用）
 - Node.js + Express.js + TypeScript
-- SQLite database with Sequelize ORM
-- RESTful API architecture
-- Input validation with express-validator
+- SQLite データベース + Sequelize ORM
+- RESTful API アーキテクチャ
+- express-validator による入力検証
 
-### Frontend
+### フロントエンド
 - React + TypeScript
-- Vite for fast development
-- Tailwind CSS for styling
-- Axios for API calls
-- Context API for state management
-- date-fns for date handling
-- lucide-react for icons
+- Vite（高速開発）
+- Tailwind CSS（スタイリング）
+- LocalStorage（GitHub Pages版ではデータ永続化）
+- Context API（状態管理）
+- date-fns（日付処理）
+- lucide-react（アイコン）
 
-## Prerequisites
+## 前提条件
 
-- Node.js (v18 or higher)
-- npm (v9 or higher)
+- Node.js（v18以上）
+- npm（v9以上）
 
-## Installation
+## インストール
 
-1. Clone the repository:
+1. リポジトリをクローン:
 ```bash
-git clone <repository-url>
+git clone https://github.com/RyutoKanazawa/TODO.git
 cd todo
 ```
 
-2. Install dependencies:
+2. 依存関係をインストール:
 ```bash
-# Install root dependencies
+# ルートの依存関係をインストール
 npm install
 
-# Install backend dependencies
+# バックエンドの依存関係をインストール
 cd backend && npm install && cd ..
 
-# Install frontend dependencies
+# フロントエンドの依存関係をインストール
 cd frontend && npm install && cd ..
 ```
 
-## Development
+## 開発
 
-### Run both frontend and backend concurrently:
+### フロントエンドとバックエンドを同時実行:
 ```bash
 npm run dev
 ```
 
-### Run backend only:
+### バックエンドのみ実行:
 ```bash
 npm run backend
 ```
 
-### Run frontend only:
+### フロントエンドのみ実行:
 ```bash
 npm run frontend
 ```
 
-The application will be available at:
-- **Frontend**: http://localhost:5173
-- **Backend**: http://localhost:3000
+アプリケーションは以下のURLで利用可能:
+- **フロントエンド**: http://localhost:5173
+- **バックエンド**: http://localhost:3000
 - **API**: http://localhost:3000/api
 
-## API Endpoints
+## APIエンドポイント
 
-### Tasks
-- `GET /api/tasks` - Get all tasks (supports filtering and sorting)
-  - Query params: `completed`, `priority`, `categoryId`, `tag`, `sortBy`, `order`
-- `GET /api/tasks/:id` - Get single task
-- `POST /api/tasks` - Create new task
-- `PUT /api/tasks/:id` - Update task
-- `PATCH /api/tasks/:id/complete` - Toggle task completion
-- `DELETE /api/tasks/:id` - Delete task
+### タスク
+- `GET /api/tasks` - 全タスクを取得（フィルタリングとソートに対応）
+  - クエリパラメータ: `completed`, `priority`, `categoryId`, `tag`, `sortBy`, `order`
+- `GET /api/tasks/:id` - 単一タスクを取得
+- `POST /api/tasks` - 新規タスクを作成
+- `PUT /api/tasks/:id` - タスクを更新
+- `PATCH /api/tasks/:id/complete` - タスクの完了状態を切り替え
+- `DELETE /api/tasks/:id` - タスクを削除
 
-### Categories
-- `GET /api/categories` - Get all categories
-- `GET /api/categories/:id` - Get single category
-- `POST /api/categories` - Create category
-- `PUT /api/categories/:id` - Update category
-- `DELETE /api/categories/:id` - Delete category
+### カテゴリ
+- `GET /api/categories` - 全カテゴリを取得
+- `GET /api/categories/:id` - 単一カテゴリを取得
+- `POST /api/categories` - カテゴリを作成
+- `PUT /api/categories/:id` - カテゴリを更新
+- `DELETE /api/categories/:id` - カテゴリを削除
 
-## Project Structure
+## プロジェクト構造
 
 ```
 todo/
-├── backend/                 # Backend application
+├── backend/                 # バックエンドアプリケーション
 │   ├── src/
-│   │   ├── config/         # Database configuration
-│   │   ├── controllers/    # Request handlers
-│   │   ├── middleware/     # Express middleware
-│   │   ├── models/         # Database models
-│   │   ├── routes/         # API routes
-│   │   ├── types/          # TypeScript types
-│   │   └── server.ts       # Application entry point
-│   └── database/           # SQLite database files
-├── frontend/               # Frontend application
+│   │   ├── config/         # データベース設定
+│   │   ├── controllers/    # リクエストハンドラー
+│   │   ├── middleware/     # Expressミドルウェア
+│   │   ├── models/         # データベースモデル
+│   │   ├── routes/         # APIルート
+│   │   ├── types/          # TypeScript型定義
+│   │   └── server.ts       # アプリケーションエントリーポイント
+│   └── database/           # SQLiteデータベースファイル
+├── frontend/               # フロントエンドアプリケーション
 │   ├── src/
-│   │   ├── components/     # React components
+│   │   ├── components/     # Reactコンポーネント
 │   │   ├── context/        # React Context
-│   │   ├── services/       # API services
-│   │   ├── types/          # TypeScript types
-│   │   ├── utils/          # Utility functions
-│   │   └── App.tsx         # Main app component
-│   └── public/             # Static assets
-└── package.json            # Root package configuration
+│   │   ├── services/       # APIサービス
+│   │   ├── types/          # TypeScript型定義
+│   │   ├── utils/          # ユーティリティ関数
+│   │   ├── test/           # テストファイル
+│   │   └── App.tsx         # メインアプリコンポーネント
+│   └── public/             # 静的アセット
+└── package.json            # ルートパッケージ設定
 ```
 
-## Building for Production
+## 本番環境用ビルド
 
-### Build backend:
+### バックエンドをビルド:
 ```bash
 cd backend && npm run build
 ```
 
-### Build frontend:
+### フロントエンドをビルド:
 ```bash
 cd frontend && npm run build
 ```
 
-### Build both:
+### 両方をビルド:
 ```bash
 npm run build
 ```
 
-## Environment Variables
+## GitHub Pagesへのデプロイ
 
-Backend `.env` file:
+```bash
+cd frontend
+npm run build
+npm run deploy
+```
+
+## 環境変数
+
+バックエンドの`.env`ファイル:
 ```
 PORT=3000
 NODE_ENV=development
 DATABASE_PATH=./database/todo.db
 ```
 
-## License
+## テスト
+
+```bash
+cd frontend
+npm run test      # ウォッチモード
+npm run test:run  # 1回実行
+```
+
+詳細は`CLAUDE.md`を参照してください。
+
+## ライセンス
 
 MIT
 
-## Author
+## 作者
 
 Created with Claude Code
