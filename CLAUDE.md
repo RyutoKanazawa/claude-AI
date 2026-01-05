@@ -1,22 +1,22 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+このファイルは、このリポジトリで作業する際にClaude Code (claude.ai/code)にガイダンスを提供します。
 
-## Repository Overview
+## リポジトリ概要
 
-Full-stack TODO application with LocalStorage persistence for GitHub Pages deployment.
+GitHub Pagesにデプロイするための、LocalStorageを使用したフルスタックTODOアプリケーションです。
 
-## GitHub Repository
+## GitHubリポジトリ
 
-- **Remote**: https://github.com/RyutoKanazawa/claude-AI
-- **Visibility**: Public
+- **リモート**: https://github.com/RyutoKanazawa/claude-AI
+- **公開設定**: パブリック
 - **GitHub Pages**: https://ryutokanazawa.github.io/claude-AI/
 
-## Project Structure
+## プロジェクト構造
 
 ```
 todo/
-├── backend/          # Node.js + Express + TypeScript + SQLite (not deployed)
+├── backend/          # Node.js + Express + TypeScript + SQLite（デプロイなし）
 │   ├── src/
 │   │   ├── config/
 │   │   ├── models/
@@ -32,134 +32,134 @@ todo/
 │   │   ├── services/
 │   │   ├── types/
 │   │   ├── utils/
-│   │   └── test/    # Vitest test files
+│   │   └── test/    # Vitestテストファイル
 │   └── package.json
-└── package.json     # Root - runs both with concurrently
+└── package.json     # ルート - concurrentlyで両方を実行
 ```
 
-## Technology Stack
+## 技術スタック
 
-### Frontend (Deployed)
+### フロントエンド（デプロイ済み）
 - React 19 + Vite 5
-- TypeScript (strict mode with erasableSyntaxOnly)
+- TypeScript（strictモード、erasableSyntaxOnly有効）
 - Tailwind CSS 3
-- LocalStorage for data persistence
-- Responsive design for mobile & desktop
-- Libraries: date-fns, lucide-react
+- LocalStorageでデータ永続化
+- モバイル・デスクトップ対応のレスポンシブデザイン
+- ライブラリ: date-fns, lucide-react
 
-### Backend (Not deployed, for local development)
+### バックエンド（ローカル開発用、デプロイなし）
 - Node.js + Express + TypeScript
 - SQLite + Sequelize ORM
 - RESTful API
 
-## Development Commands
+## 開発コマンド
 
-### Root Directory
+### ルートディレクトリ
 ```bash
-npm run dev       # Run both frontend and backend
-npm run frontend  # Run frontend only (port 5173)
-npm run backend   # Run backend only (port 3000)
+npm run dev       # フロントエンドとバックエンドの両方を実行
+npm run frontend  # フロントエンドのみ実行（ポート5173）
+npm run backend   # バックエンドのみ実行（ポート3000）
 ```
 
-### Frontend Directory
+### フロントエンドディレクトリ
 ```bash
-npm run dev       # Development server (port 5173)
-npm run build     # Production build
-npm run preview   # Preview production build
-npm run deploy    # Deploy to GitHub Pages
-npm run test      # Run tests in watch mode
-npm run test:ui   # Run tests with UI
-npm run test:run  # Run tests once
+npm run dev       # 開発サーバー起動（ポート5173）
+npm run build     # 本番用ビルド
+npm run preview   # 本番ビルドのプレビュー
+npm run deploy    # GitHub Pagesにデプロイ
+npm run test      # テストをウォッチモードで実行
+npm run test:ui   # UIでテスト実行
+npm run test:run  # テストを1回実行
 ```
 
-## Testing Notes
+## テストに関する注意事項
 
-### Test Framework
-- **Vitest** with **happy-dom** (not jsdom due to ES module issues)
-- **React Testing Library** for component testing
-- **@testing-library/user-event** for user interaction simulation
+### テストフレームワーク
+- **Vitest** + **happy-dom**（jsdomはESモジュールの問題があるため使用しない）
+- **React Testing Library** コンポーネントテスト用
+- **@testing-library/user-event** ユーザー操作のシミュレーション用
 
-### Important Testing Considerations
+### 重要なテスト設定のポイント
 
-1. **TypeScript Configuration**
-   - Tests are excluded from production build: `tsconfig.app.json` excludes `src/test`
-   - Test files use separate TypeScript settings if needed
+1. **TypeScript設定**
+   - テストファイルは本番ビルドから除外: `tsconfig.app.json`で`src/test`を除外
+   - 必要に応じてテストファイルは別のTypeScript設定を使用
 
-2. **Vite Config Issue**
-   - **DO NOT** use `defineConfig` from `vitest/config` in `vite.config.ts`
-   - This causes version conflicts between Vite and Vitest's bundled Vite
-   - Keep test config separate or use triple-slash directive
-   - Current solution: removed test config from vite.config.ts for clean builds
+2. **Vite設定の問題**
+   - **重要**: `vite.config.ts`で`vitest/config`の`defineConfig`を使用しない
+   - ViteとVitestに同梱されたViteのバージョン競合が発生する
+   - テスト設定は別ファイルにするか、triple-slashディレクティブを使用
+   - 現在の解決策: vite.config.tsからテスト設定を削除してクリーンビルドを実現
 
-3. **Environment Issues**
-   - jsdom has ES module compatibility issues with parse5
-   - Use **happy-dom** instead: `environment: 'happy-dom'`
-   - Configure in separate vitest config if needed
+3. **環境の問題**
+   - jsdomはparse5とのESモジュール互換性の問題がある
+   - 代わりに**happy-dom**を使用: `environment: 'happy-dom'`
+   - 必要に応じて別のvitest設定ファイルで設定
 
-4. **Priority Type**
-   - Changed from `enum` to `type` + `const object` due to `erasableSyntaxOnly`
-   - Use `Priority.HIGH` for values, `Priority` type for typing
+4. **Priority型**
+   - `erasableSyntaxOnly`により`enum`から`type` + `const object`に変更
+   - 値には`Priority.HIGH`を使用、型付けには`Priority`型を使用
 
-5. **Test Status**
-   - ✅ TaskContext tests (5/5): LocalStorage operations work correctly
-   - ⚠️ TaskForm tests (4/4 failed): Query issues, but functionality confirmed working
-   - Categories ARE displaying correctly in production (verified in test HTML output)
+5. **テスト結果**
+   - ✅ TaskContextテスト（5/5合格）: LocalStorageの操作が正常に動作
+   - ⚠️ TaskFormテスト（4/4失敗）: クエリの問題だが、機能自体は正常動作を確認済み
+   - カテゴリは本番環境で正しく表示されている（テストのHTML出力で確認済み）
 
-### Running Tests
+### テストの実行方法
 
-```bash
-cd frontend
-npm run test      # Interactive watch mode
-npm run test:run  # Single run for CI
-```
-
-### Test Files Location
-- `frontend/src/test/setup.ts` - Test setup and localStorage mock
-- `frontend/src/test/TaskContext.test.tsx` - Context and state management tests
-- `frontend/src/test/TaskForm.test.tsx` - Form component tests
-
-## Deployment
-
-### GitHub Pages Deployment
 ```bash
 cd frontend
-npm run build    # Build for production
-npm run deploy   # Deploy to gh-pages branch
+npm run test      # インタラクティブなウォッチモード
+npm run test:run  # CI用の1回実行
 ```
 
-### Deployment Notes
-- Base path is `/claude-AI/` (configured in vite.config.ts)
-- Uses LocalStorage instead of backend API
-- No backend is deployed to GitHub Pages
-- Repository must be public for free GitHub Pages
+### テストファイルの場所
+- `frontend/src/test/setup.ts` - テストセットアップとlocalStorageのモック
+- `frontend/src/test/TaskContext.test.tsx` - コンテキストと状態管理のテスト
+- `frontend/src/test/TaskForm.test.tsx` - フォームコンポーネントのテスト
 
-## Key Features
+## デプロイ
 
-- ✅ Task CRUD operations with LocalStorage
-- ✅ Categories with color coding
-- ✅ Tags system
-- ✅ Priority levels (High, Medium, Low)
-- ✅ Due dates with overdue indicators
-- ✅ Filtering and sorting
-- ✅ Responsive design (mobile & desktop)
-- ✅ Japanese UI
+### GitHub Pagesへのデプロイ手順
+```bash
+cd frontend
+npm run build    # 本番用ビルド
+npm run deploy   # gh-pagesブランチにデプロイ
+```
 
-## Known Issues & Solutions
+### デプロイに関する注意事項
+- ベースパスは`/claude-AI/`（vite.config.tsで設定）
+- バックエンドAPIの代わりにLocalStorageを使用
+- バックエンドはGitHub Pagesにデプロイされない
+- 無料のGitHub Pagesを使用するにはリポジトリをパブリックにする必要がある
 
-### Category Display Issue
-- **Symptom**: Categories not showing in dropdown
-- **Cause**: Browser cache
-- **Solution**: Hard reload (Cmd+Shift+R or Ctrl+Shift+R)
+## 主な機能
 
-### Build Errors
-- If getting test-related TypeScript errors during build:
-  - Check `tsconfig.app.json` excludes `src/test`
-  - Ensure `vite.config.ts` doesn't import from `vitest/config`
+- ✅ LocalStorageを使用したタスクのCRUD操作
+- ✅ 色分けされたカテゴリ
+- ✅ タグシステム
+- ✅ 優先度レベル（高、中、低）
+- ✅ 期限日と期限切れインジケーター
+- ✅ フィルタリングとソート機能
+- ✅ レスポンシブデザイン（モバイル・デスクトップ対応）
+- ✅ 日本語UI
 
-## Important Files
+## 既知の問題と解決方法
 
-- `frontend/src/context/TaskContext.tsx` - State management with LocalStorage
-- `frontend/src/types/index.ts` - Type definitions (Priority as type + const)
-- `frontend/src/components/TaskForm.tsx` - Task creation/editing form
-- `frontend/vite.config.ts` - Build configuration (DO NOT add vitest config here)
-- `frontend/tsconfig.app.json` - TypeScript config for build (excludes tests)
+### カテゴリ表示の問題
+- **症状**: ドロップダウンにカテゴリが表示されない
+- **原因**: ブラウザのキャッシュ
+- **解決方法**: ハードリロード（Cmd+Shift+R または Ctrl+Shift+R）
+
+### ビルドエラー
+- ビルド時にテスト関連のTypeScriptエラーが出る場合:
+  - `tsconfig.app.json`で`src/test`が除外されているか確認
+  - `vite.config.ts`で`vitest/config`からインポートしていないことを確認
+
+## 重要なファイル
+
+- `frontend/src/context/TaskContext.tsx` - LocalStorageを使った状態管理
+- `frontend/src/types/index.ts` - 型定義（Priorityは型+constオブジェクト）
+- `frontend/src/components/TaskForm.tsx` - タスク作成・編集フォーム
+- `frontend/vite.config.ts` - ビルド設定（ここにvitestの設定を追加しないこと）
+- `frontend/tsconfig.app.json` - ビルド用TypeScript設定（テストを除外）
