@@ -20,51 +20,51 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onToggleCom
   };
 
   return (
-    <div className={`bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow ${
+    <div className={`bg-white rounded-lg shadow-sm border p-3 sm:p-4 hover:shadow-md transition-shadow ${
       task.isCompleted ? 'opacity-60' : ''
     }`}>
-      <div className="flex items-start gap-3">
+      <div className="flex items-start gap-2 sm:gap-3">
         <input
           type="checkbox"
           checked={task.isCompleted}
           onChange={() => onToggleComplete(task.id)}
-          className="mt-1 w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+          className="mt-0.5 w-4 h-4 sm:w-5 sm:h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer flex-shrink-0"
         />
 
         <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-2 mb-2">
-            <h3 className={`text-lg font-semibold ${
+          <div className="flex items-start justify-between gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+            <h3 className={`text-sm sm:text-base lg:text-lg font-semibold ${
               task.isCompleted ? 'line-through text-gray-500' : 'text-gray-900'
             }`}>
               {task.title}
             </h3>
-            <div className="flex items-center gap-2 flex-shrink-0">
+            <div className="flex items-center gap-0.5 sm:gap-1 flex-shrink-0">
               <button
                 onClick={() => onEdit(task)}
-                className="p-1 text-gray-500 hover:text-blue-600 transition-colors"
+                className="p-0.5 sm:p-1 text-gray-500 hover:text-blue-600 transition-colors"
                 title="タスクを編集"
               >
-                <Pencil size={18} />
+                <Pencil size={16} className="sm:w-[18px] sm:h-[18px]" />
               </button>
               <button
                 onClick={() => onDelete(task.id)}
-                className="p-1 text-gray-500 hover:text-red-600 transition-colors"
+                className="p-0.5 sm:p-1 text-gray-500 hover:text-red-600 transition-colors"
                 title="タスクを削除"
               >
-                <Trash2 size={18} />
+                <Trash2 size={16} className="sm:w-[18px] sm:h-[18px]" />
               </button>
             </div>
           </div>
 
           {task.description && (
-            <p className={`text-sm mb-3 ${
+            <p className={`text-xs sm:text-sm mb-2 sm:mb-3 ${
               task.isCompleted ? 'text-gray-400' : 'text-gray-600'
             }`}>
               {task.description}
             </p>
           )}
 
-          <div className="flex flex-wrap items-center gap-3 text-sm">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm">
             <PriorityBadge priority={task.priority} />
 
             {task.category && (
