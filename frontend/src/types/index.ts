@@ -1,8 +1,10 @@
-export enum Priority {
-  HIGH = 'high',
-  MEDIUM = 'medium',
-  LOW = 'low'
-}
+export type Priority = 'high' | 'medium' | 'low';
+
+export const Priority = {
+  HIGH: 'high' as const,
+  MEDIUM: 'medium' as const,
+  LOW: 'low' as const,
+};
 
 export interface Category {
   id: number;

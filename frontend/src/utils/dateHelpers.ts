@@ -1,4 +1,4 @@
-import { format, isAfter, isBefore, isToday, parseISO, differenceInDays } from 'date-fns';
+import { format, isBefore, isToday, parseISO, differenceInDays } from 'date-fns';
 
 export const formatDate = (date: string | Date | undefined): string => {
   if (!date) return '期限なし';
